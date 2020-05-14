@@ -8,4 +8,24 @@
     margin: .2rem;
 }
 
-/* Need to get my 5 day forecast to align horizontally and put some background colors to get icon to display properly */
+#fiveDay {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.whatever, #mainContent {
+    margin: 1rem;
+    padding: .5rem;
+    background-color: lightblue;
+    font-weight: bold;
+    color: white;
+    border-style: solid;
+    border-color: gray;
+    border-radius: 5px;
+}
+
+.whatever {
+    min-width: 8rem;
+}

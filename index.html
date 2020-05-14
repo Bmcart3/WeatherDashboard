@@ -34,8 +34,10 @@
             </div>
             <!-- Div that will house city and current weather info -->
             <div class="col-9">
-                <div>
+                <div id="mainContent">
                     <h1 id="inputCity"></h1>
+                    <p id="currentDate"></p>
+                    <img id="currentIcon">
                     <p id="inputTemp"></p>
                     <p id="inputHum"></p>
                     <p id="inputWind"></p>
@@ -45,7 +47,7 @@
         </div>
         <!--This will house the 5 day forecast.-->
         <div class = "row">
-            <div class = "col-8"></div>
+            <div class = "col-8" id = fiveDay></div>
             <div class = "col-4"></div>
         </div>
     </main>
