@@ -1,3 +1,4 @@
+
 //Starts with previously stored searches or starts with an empty array.
 var searches = JSON.parse(localStorage.getItem("searches")) || [];
 
@@ -35,7 +36,7 @@ $(document).on("click", ".buttons", function () {
 
 //function getWeather makes 3 api requests for current weather, forecast weather, and uv index information.
 function getWeather(city) {
-    
+
     $("#fiveDay").empty();
     $.ajax({
         url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=b308b6060f06e57b47078db89c772633",
@@ -44,7 +45,7 @@ function getWeather(city) {
         console.log(response);
         var lat = response.coord.lat;
         var long = response.coord.lon;
-        
+
         $("#inputCity").text(response.name + " Weather");
         $("#currentDate").text(new Date());
         $("#currentIcon").attr("src", "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png");
@@ -54,9 +55,9 @@ function getWeather(city) {
 
         //api request for the UV. uses lat and long from the input city coordinates.
         $.ajax({
-            url: "http://api.openweathermap.org/data/2.5/uvi?appid=b308b6060f06e57b47078db89c772633&lat="+ lat +"&lon=" + long,
+            url: "http://api.openweathermap.org/data/2.5/uvi?appid=b308b6060f06e57b47078db89c772633&lat=" + lat + "&lon=" + long,
             method: "GET"
-        }).then(function(response){
+        }).then(function (response) {
             console.log(response);
             $("#inputUV").text("UV index: " + Math.floor(response.value));
         })
@@ -65,14 +66,14 @@ function getWeather(city) {
     $.ajax({
         url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=b308b6060f06e57b47078db89c772633",
         method: "GET"
-    }).then(function(response){
+    }).then(function (response) {
         console.log(response);
         //each array item is a 3 hour block. incremented by 24 hours per array item to get the next day at same time block.
         var dataArray = [response.list[4], response.list[12], response.list[20], response.list[28], response.list[36]];
-        var $newH1 = $("<h1>").text("5 Day Forecast").css({"text-decoration":"underline"});
+        var $newH1 = $("<h1>").text("5 Day Forecast").css({ "text-decoration": "underline" });
         $("#fiveDay").append($newH1);
         //Loops through each item in data array and dynamically creates 5 day weather forecast.
-        dataArray.forEach(function(arrItem){
+        dataArray.forEach(function (arrItem) {
             var $div = $("<div>").addClass("whatever");
             var $date = $("<p>").text(arrItem.dt_txt.split(" ")[0]);
             var $icon = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + arrItem.weather[0].icon + "@2x.png");
@@ -81,7 +82,7 @@ function getWeather(city) {
             $div.append($date, $icon, $temp, $humidity);
             $("#fiveDay").append($div);
         })
-    });   
+    });
 };
 
 renderHistory();
